@@ -12,7 +12,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
 </head>
 
 <body>
@@ -48,12 +48,7 @@
     </div>
     <!-- <button id="registerButton" class="btn btn-primary">Member Registration</button> -->
 
+    <script src="index.js"></script>
 </body>
-<script src="index.js"></script>
-<script> $(document).ready(function () {
-        $.get("http://localhost:3000/member-registration/get/all", function (data) { // Assuming data is an array of member objects 
-            data.forEach(function (member) { $('#membersTableBody').append(`<tr> <td>${member.firstName}</td> <td>${member.middleName}</td> <td>${member.dob}</td> <td>${member.nameOfMother}</td> <td>${member.nameOfFather}</td> <td>${member.address}</td> <td>${member.birthPlace}</td> </tr>`); });
-        });
-    }); </script>
 
 </html>
