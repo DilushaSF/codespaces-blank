@@ -1,12 +1,12 @@
 $(document).ready(function () {
-  console.log("jquery loaded");
+  // console.log("jquery loaded");
 
-  $.get(
-    "http://localhost:3000/member-registration/get/all",
-    function (data, status) {
-      console.log("DAta", data);
-    }
-  );
+  // $.get(
+  //   "http://localhost:3000/member-registration/get/all",
+  //   function (data, status) {
+  //     console.log("DAta", data);
+  //   }
+  // );
 
   $("#registerButton").click(function () {
     $.get(
@@ -63,7 +63,8 @@ $(document).ready(function () {
         // Handle the response from the server
         alert("Member added successfully!");
         // Clear the form after successful submission
-        // $("#addMemberForm")[0].reset();
+        $("#addMemberForm")[0].reset();
+        window.location.href = "members.html";
       },
 
       error: function (error) {
@@ -78,5 +79,9 @@ $(document).ready(function () {
 
   $("#registerButton").click(function () {
     window.location.href = "members.html";
+  });
+
+  $("#backToHomeButton").click(function () {
+    window.location.href = "home.html";
   });
 });

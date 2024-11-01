@@ -17,13 +17,17 @@
 
 <body>
     <div class="members-form well">
-        <div class="row">
-            <div class="col-6">
+        <div class="row mt-3">
+            <div class="col-4">
                 <h1>Registered Members</h1>
             </div>
 
-            <div class="col-6">
+            <div class="col-4">
                 <button id="addNewRegistrationButton" class="btn btn-primary mb-3">Add New Registration</button>
+            </div>
+
+            <div class="col-4">
+                <button id="backToHomeButton" class="btn btn-secondary mb-3">Back to Home</button>
             </div>
 
         </div>
@@ -50,5 +54,13 @@
 
     <script src="index.js"></script>
 </body>
+
+<script>
+    $(document).ready(function () {
+        $("#backToHomeButton").click(function () {
+            window.location.href = "home.html";
+        });
+    });
+</script>
 
 </html>

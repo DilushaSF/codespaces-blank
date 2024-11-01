@@ -16,7 +16,17 @@
 
 <body>
     <div class="container mt-5">
-        <h2>Add Member Details</h2>
+        <div class="row mt-3">
+            <div class="col-4">
+                <h2>Add Member Details</h2>
+            </div>
+
+            <div class="col-4">
+                <button id="backToMemberList" class="btn btn-secondary mb-3">Back to Home</button>
+            </div>
+
+        </div>
+
         <br>
 
         <form id="addMemberForm">
@@ -71,5 +81,13 @@
 
     <script src="index.js"></script>
 </body>
+
+<script>
+    $(document).ready(function () {
+        $("#backToMemberList").click(function () {
+            window.location.href = "members.html";
+        });
+    });
+</script>
 
 </html>
