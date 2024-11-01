@@ -97,12 +97,29 @@
         $("#backToMemberList").click(function () {
             window.location.href = "members.html";
         });
-        console.log("dsffsdf")
+
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const data = urlParams.get('data');
-        var decodedStringAtoB = atob(data);
-        console.log("Decodeeee ", decodedStringAtoB)
+
+        if (data) {
+            var decodedStringAtoB = atob(data);
+            
+
+            var memberData = JSON.parse(decodedStringAtoB); // Populate the form fields with the parsed data 
+            $('#firstName').val(memberData.firstName);
+            $('#middleName').val(memberData.middleName);
+            $('#sirName').val(memberData.sirName);
+            $('#dob').val(memberData.dob);
+            $('#nameOfMother').val(memberData.nameOfMother);
+            $('#nameOfFather').val(memberData.nameOfFather);
+            $('#address').val(memberData.address);
+            $('#birthPlace').val(memberData.birthPlace);
+            $('#contactNo').val(memberData.contactNo);
+            $('#marriedDate').val(memberData.marriedDate);
+            $('#marriedChurch').val(memberData.marriedChurch);
+        }
+
     });
 </script>
 
