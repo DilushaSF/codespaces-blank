@@ -32,6 +32,7 @@ $(document).ready(function () {
           <td>${member.nameOfFather}</td>
           <td>${member.address}</td>
           <td>${member.birthPlace}</td>
+          <td> <i class="fas fa-pencil-alt update-member" style="cursor:pointer;"></i> </td>
         </tr>`
       );
     });
