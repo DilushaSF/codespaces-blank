@@ -164,4 +164,33 @@ $(document).ready(function () {
       });
     }
   });
+
+  $("#loginForm").submit(function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    // Serialize form data
+    const formData = {
+      email: $("#email").val(),
+      password: $("#password").val(),
+    };
+    // alert(JSON.stringify(formData));
+
+    // Send the AJAX POST request for validation
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/signin", // Change this URL to your actual login endpoint
+      data: JSON.stringify(formData),
+      contentType: "application/json",
+      success: function (response) {
+        if (response.success) {
+          alert("Login successful!");
+          window.location.href = "home.html"; // Redirect to home.html
+        } else {
+          alert("Invalid credentials. Please try again.");
+        }
+      },
+      error: function (error) {
+        alert("Error during login: " + error.responseText);
+      },
+    });
+  });
 });
