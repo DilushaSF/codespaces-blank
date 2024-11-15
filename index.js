@@ -146,6 +146,10 @@ $(document).ready(function () {
     window.location.href = "home.html";
   });
 
+  $("#logoutButton").click(function () {
+    window.location.href = "index.html";
+  });
+
   $(document).on("click", ".delete-button", function () {
     const memberId = $(this).data("id"); // Get member ID from data-id attribute
 
