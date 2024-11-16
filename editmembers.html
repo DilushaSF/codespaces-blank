@@ -28,7 +28,7 @@
     <div class="container mt-5">
         <div class="row mt-3">
             <div class="col-4">
-                <h2>Add Member Details</h2>
+                <h2>Edit Member Details</h2>
             </div>
 
             <div class="col-4">
@@ -38,7 +38,7 @@
 
         <br>
 
-        <form id="addMemberForm" class="border border-2 border-secondary rounded p-3">
+        <form id="editMemberForm" class="border border-2 border-secondary rounded p-3">
             <div class="row mt-2">
                 <div class="pb-3 col-4">
                     <label for="firstName" class="form-label">First Name</label>
@@ -101,7 +101,7 @@
             </div>
 
             <br><br>
-            <button type="submit" class="btn btn-success w-100">Save</button>
+            <button type="submit" class="btn btn-primary w-100">Save</button>
         </form>
     </div>
 
@@ -109,34 +109,34 @@
 </body>
 
 <script>
-    $(document).ready(function () {
-        $("#backToMemberList").click(function () {
-            window.location.href = "members.html";
-        });
+    // $(document).ready(function () {
+    //     $("#backToMemberList").click(function () {
+    //         window.location.href = "members.html";
+    //     });
 
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const data = urlParams.get('data');
+    //     const queryString = window.location.search;
+    //     const urlParams = new URLSearchParams(queryString);
+    //     const data = urlParams.get('data');
+    //     alert(JSON.stringify(data));
+    //     if (data) {
+    //         var decodedStringAtoB = atob(data);
 
-        if (data) {
-            var decodedStringAtoB = atob(data);
 
+    //         var memberData = JSON.parse(decodedStringAtoB); // Populate the form fields with the parsed data
+    //         $('#firstName').val(memberData.firstName);
+    //         $('#middleName').val(memberData.middleName);
+    //         $('#sirName').val(memberData.sirName);
+    //         $('#dob').val(memberData.dob);
+    //         $('#nameOfMother').val(memberData.nameOfMother);
+    //         $('#nameOfFather').val(memberData.nameOfFather);
+    //         $('#address').val(memberData.address);
+    //         $('#birthPlace').val(memberData.birthPlace);
+    //         $('#contactNo').val(memberData.contactNo);
+    //         $('#marriedDate').val(memberData.marriedDate);
+    //         $('#marriedChurch').val(memberData.marriedChurch);
+    //     }
 
-            var memberData = JSON.parse(decodedStringAtoB); // Populate the form fields with the parsed data 
-            $('#firstName').val(memberData.firstName);
-            $('#middleName').val(memberData.middleName);
-            $('#sirName').val(memberData.sirName);
-            $('#dob').val(memberData.dob);
-            $('#nameOfMother').val(memberData.nameOfMother);
-            $('#nameOfFather').val(memberData.nameOfFather);
-            $('#address').val(memberData.address);
-            $('#birthPlace').val(memberData.birthPlace);
-            $('#contactNo').val(memberData.contactNo);
-            $('#marriedDate').val(memberData.marriedDate);
-            $('#marriedChurch').val(memberData.marriedChurch);
-        }
-
-    });
+    // });
 </script>
 
 </html>

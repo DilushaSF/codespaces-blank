@@ -23,7 +23,6 @@ $(document).ready(function () {
 
   $.get("http://localhost:3000/member-registration/get/all", function (data) {
     data.forEach(function (member) {
-      // console.log("member ", member);
       var encodedStringBtoA = btoa(JSON.stringify(member));
       $("#membersTableBody").append(
         `<tr>
@@ -35,7 +34,8 @@ $(document).ready(function () {
           <td>${member.address}</td>
           <td>${member.birthPlace}</td>
           <td> 
-            <a href="addmembers.html?id=${member._id}&data=${encodedStringBtoA}" class="btn btn-primary"> <i class="fas fa-pencil-alt"></i> Update 
+            <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
+              <i class="fas fa-pencil-alt"></i> Update
             </a>
             
             <button class="btn btn-danger delete-button" data-id="${member._id}">
@@ -44,93 +44,6 @@ $(document).ready(function () {
           </td>
         </tr>`
       );
-    });
-  });
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const data = urlParams.get("data");
-
-  // var decodedData = atob(data);
-  // var memberDetails = JSON.parse(decodedData);
-
-  if (data) {
-    // Fetch member data and prefill the form
-    // $.get(
-    //   `http://localhost:3000/update-member-registration/${memberId}`,
-    //   function (member) {
-    //     $("#firstName").val(member.firstName);
-    //     $("#middleName").val(member.middleName);
-    //     $("#sirName").val(member.sirName);
-    //     $("#dob").val(member.dob);
-    //     $("#nameOfMother").val(member.nameOfMother);
-    //     $("#nameOfFather").val(member.nameOfFather);
-    //     $("#address").val(member.address);
-    //     $("#birthPlace").val(member.birthPlace);
-    //     $("#contactNo").val(member.contactNo);
-    //     $("#marriedDate").val(member.marriedDate);
-    //     $("#marriedChurch").val(member.marriedChurch);
-    //   }
-    // );
-
-    var decodedStringAtoB = atob(data);
-    // console.log("Decodeeee ", decodedStringAtoB);
-
-    var memberData = JSON.parse(decodedStringAtoB); // Populate the form fields with the parsed data
-    $("#firstName").val(memberData.firstName);
-    $("#middleName").val(memberData.middleName);
-    $("#sirName").val(memberData.sirName);
-    $("#dob").val(memberData.dob);
-    $("#nameOfMother").val(memberData.nameOfMother);
-    $("#nameOfFather").val(memberData.nameOfFather);
-    $("#address").val(memberData.address);
-    $("#birthPlace").val(memberData.birthPlace);
-    $("#contactNo").val(memberData.contactNo);
-    $("#marriedDate").val(memberData.marriedDate);
-    $("#marriedChurch").val(memberData.marriedChurch);
-  }
-
-  $("#addMemberForm").submit(function (event) {
-    event.preventDefault();
-    let formData = {
-      firstName: $("#firstName").val(),
-      middleName: $("#middleName").val(),
-      sirName: $("#sirName").val(),
-      dob: $("#dob").val(),
-      nameOfMother: $("#nameOfMother").val(),
-      nameOfFather: $("#nameOfFather").val(),
-      address: $("#address").val(),
-      birthPlace: $("#birthPlace").val(),
-      contactNo: $("#contactNo").val(),
-      marriedDate: $("#marriedDate").val(),
-      marriedChurch: $("#marriedChurch").val(),
-    };
-
-    let method_url = "http://localhost:3000/member-registration/create";
-    let method = "POST";
-
-    if (memberData._id) {
-      method_url = `http://localhost:3000/update-member-registration/${memberData._id}`;
-      method = "PUT";
-    }
-
-    $.ajax({
-      type: method,
-      url: method_url,
-      data: JSON.stringify(formData),
-      contentType: "application/json",
-      success: function (response) {
-        console.log(response);
-        // Handle the response from the server
-        alert("Member added successfully!");
-        // Clear the form after successful submission
-        // $("#addMemberForm")[0].reset();
-        window.location.href = "members.html";
-      },
-
-      error: function (error) {
-        alert("Error adding member: " + error.responseText);
-      },
     });
   });
 
@@ -161,6 +74,7 @@ $(document).ready(function () {
           // Remove the row from the table
           $(`#row-${memberId}`).remove();
           alert("Member deleted successfully!");
+          window.location.href = "members.html";
         },
         error: function () {
           alert("Failed to delete the member. Please try again.");
@@ -176,7 +90,6 @@ $(document).ready(function () {
       email: $("#email").val(),
       password: $("#password").val(),
     };
-    // alert(JSON.stringify(formData));
 
     // Send the AJAX POST request for validation
     $.ajax({
@@ -196,5 +109,123 @@ $(document).ready(function () {
         alert("Error during login: " + error.responseText);
       },
     });
+  });
+
+  // New create post method
+  // Attach a submit event listener to the form
+  $("#addMemberForm").on("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Serialize the form data into a JSON object
+    const formData = {
+      firstName: $("#firstName").val(),
+      middleName: $("#middleName").val(),
+      sirName: $("#sirName").val(),
+      nameOfMother: $("#nameOfMother").val(),
+      nameOfFather: $("#nameOfFather").val(),
+      birthPlace: $("#birthPlace").val(),
+      dob: $("#dob").val(),
+      address: $("#address").val(),
+      contactNo: $("#contactNo").val(),
+      marriedDate: $("#marriedDate").val(),
+      marriedChurch: $("#marriedChurch").val(),
+    };
+
+    // Send the data to the server using an AJAX POST request
+    $.ajax({
+      url: "http://localhost:3000/member-registration/create", // Replace this with your actual API endpoint
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(formData), // Send the form data as a JSON string
+      success: function (response) {
+        // Handle success response
+        alert("Member details saved successfully!");
+        $("#addMemberForm")[0].reset(); // Reset the form
+        window.location.href = "members.html";
+      },
+      error: function (error) {
+        // Handle error response
+        console.error("Error saving member details:", error);
+        alert(
+          "An error occurred while saving member details. Please try again."
+        );
+      },
+    });
+  });
+
+  // Navigate back to the Registered Member List on button click
+  $("#backToMemberList").on("click", function () {
+    window.location.href = "/members"; // Replace this with your actual member list page URL
+  });
+
+  // new update function
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const memberId = urlParams.get("id");
+
+  $.ajax({
+    url: `http://localhost:3000/member-registration/${memberId}`, // Replace with your actual endpoint to get member details
+    type: "GET",
+    success: function (data) {
+      // alert(JSON.stringify(data));
+      console.log("Member Details:", data);
+      // Populate the form fields with the retrieved data
+      $("#firstName").val(data.member.firstName);
+      $("#middleName").val(data.member.middleName);
+      $("#sirName").val(data.member.sirName);
+      $("#nameOfMother").val(data.member.nameOfMother);
+      $("#nameOfFather").val(data.member.nameOfFather);
+      $("#birthPlace").val(data.member.birthPlace);
+      $("#dob").val(data.member.dob);
+      $("#address").val(data.member.address);
+      $("#contactNo").val(data.member.contactNo);
+      $("#marriedDate").val(data.member.marriedDate);
+      $("#marriedChurch").val(data.member.marriedChurch);
+    },
+    error: function (error) {
+      console.error("Error fetching member details:", error);
+    },
+  });
+
+  $("#editMemberForm").on("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather form data
+    const formData = {
+      firstName: $("#firstName").val(),
+      middleName: $("#middleName").val(),
+      sirName: $("#sirName").val(),
+      nameOfMother: $("#nameOfMother").val(),
+      nameOfFather: $("#nameOfFather").val(),
+      birthPlace: $("#birthPlace").val(),
+      dob: $("#dob").val(),
+      address: $("#address").val(),
+      contactNo: $("#contactNo").val(),
+      marriedDate: $("#marriedDate").val(),
+      marriedChurch: $("#marriedChurch").val(),
+    };
+
+    // Send updated data using AJAX PUT request
+    $.ajax({
+      url: `http://localhost:3000/update-member-registration/${memberId}`, // Replace with your actual endpoint to update member
+      type: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(formData),
+      success: function (response) {
+        alert("Member details updated successfully!");
+        window.location.href = "/members"; // Redirect to member list page
+      },
+      error: function (error) {
+        console.error("Error updating member details:", error);
+        alert(
+          "An error occurred while updating member details. Please try again."
+        );
+      },
+    });
+  });
+
+  // Navigate back to the Registered Member List on button click
+  $("#backToMemberList").on("click", function () {
+    window.location.href = "/members"; // Replace with your actual member list page URL
   });
 });
