@@ -228,4 +228,58 @@ $(document).ready(function () {
   $("#backToMemberList").on("click", function () {
     window.location.href = "/members"; // Replace with your actual member list page URL
   });
+
+  //search functionality
+  const apiUrl = "http://localhost:3000/member-registration/get/all";
+  let membersData = [];
+
+  // Fetch members data when the page loads
+  $.get(apiUrl, function (data) {
+    membersData = data;
+    populateTable(membersData);
+  });
+
+  // Populate the table with member data
+  function populateTable(data) {
+    const tableBody = $("#membersTableBody");
+    tableBody.empty();
+    if (data.length === 0) {
+      tableBody.append(
+        `<tr><td colspan="8" class="text-center">No records found</td></tr>`
+      );
+    } else {
+      data.forEach((member) => {
+        tableBody.append(`
+                    <tr>
+                        <td>${member.firstName}</td>
+                        <td>${member.middleName}</td>
+                        <td>${member.dob}</td>
+                        <td>${member.nameOfMother}</td>
+                        <td>${member.nameOfFather}</td>
+                        <td>${member.address}</td>
+                        <td>${member.birthPlace}</td>
+                        <td> 
+                            <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
+                                <i class="fas fa-pencil-alt"></i> Update 
+                            </a>
+                            <button class="btn btn-danger delete-button" data-id="${member._id}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `);
+      });
+    }
+  }
+
+  // onkeyup event
+  $("#searchBar").on("keyup", function () {
+    const searchTerm = $(this).val().trim().toLowerCase();
+    const filteredMembers = membersData.filter(
+      (member) =>
+        member.firstName.toLowerCase().includes(searchTerm) ||
+        member.middleName.toLowerCase().includes(searchTerm)
+    );
+    populateTable(filteredMembers);
+  });
 });
