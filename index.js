@@ -282,4 +282,47 @@ $(document).ready(function () {
     );
     populateTable(filteredMembers);
   });
+
+  //sorting function
+  let sortState = {
+    firstName: true,
+    dob: true,
+  };
+
+  $("#sortFirstName").on("click", function () {
+    sortState.firstName = !sortState.firstName;
+
+    membersData.sort((a, b) => {
+      if (sortState.firstName) {
+        return a.firstName.localeCompare(b.firstName);
+      } else {
+        return b.firstName.localeCompare(a.firstName);
+      }
+    });
+
+    const sortIcon = sortState.firstName ? "&#9650;" : "&#9660;";
+    $(this).find("span").html(sortIcon);
+
+    populateTable(membersData);
+  });
+
+  $("#sortDob").on("click", function () {
+    sortState.dob = !sortState.dob;
+
+    membersData.sort((a, b) => {
+      const dateA = new Date(a.dob);
+      const dateB = new Date(b.dob);
+
+      if (sortState.dob) {
+        return dateA - dateB;
+      } else {
+        return dateB - dateA;
+      }
+    });
+
+    const sortIcon = sortState.dob ? "&#9650;" : "&#9660;";
+    $(this).find("span").html(sortIcon);
+
+    populateTable(membersData);
+  });
 });
