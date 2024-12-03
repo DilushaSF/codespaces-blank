@@ -233,16 +233,23 @@ $(document).ready(function () {
               <td>${member.address}</td>
               <td>${member.birthPlace}</td>
               <td> 
-                  <a href="viewmembers.html?id=${member._id}" class="btn btn-info">
-                    <i class="fas fa-eye"></i> View
-                  </a>
+                <a href="viewmembers.html?id=${member._id}
+                  &firstName=${encodeURIComponent(member.firstName)}
+                  &middleName=${encodeURIComponent(member.middleName)}" 
+                    class="btn btn-info"><i class="fas fa-eye"></i> View
+                </a>
 
-                  <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
-                      <i class="fas fa-pencil-alt"></i> Update 
-                  </a>
-                  <button class="btn btn-danger delete-button" data-id="${member._id}">
-                      <i class="fas fa-trash-alt"></i> Delete
-                  </button>
+                <a href="editmembers.html?id=${member._id}
+                  &firstName=${encodeURIComponent(member.firstName)}
+                  &sirName=${encodeURIComponent(member.sirName)}" 
+                  class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Update 
+                </a>
+                  
+                <button class="btn btn-danger delete-button" 
+                  data-id="${
+                    member._id
+                  }"> <i class="fas fa-trash-alt"></i> Delete
+                </button>
               </td>
           </tr>
       `);
@@ -303,4 +310,28 @@ $(document).ready(function () {
 
     populateTable(membersData);
   });
+
+  // parsing firstname to edit and view form headings
+  function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    for (const [key, value] of urlParams.entries()) {
+      params[key] = decodeURIComponent(value);
+    }
+
+    return params;
+  }
+
+  // Extract the firstName and display it
+  const params = getQueryParams();
+  if (params.firstName && params.middleName) {
+    const heading = document.querySelector("h1");
+    heading.textContent = `View Member : ${params.firstName} ${params.middleName}`;
+  }
+  if (params.sirName) {
+    const heading = document.querySelector("h1");
+    heading.textContent = `Edit Member : ${params.firstName} ${params.sirName}`;
+  }
 });

@@ -12,16 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
-
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMH8lA5ICVdE1hi2Fd7mYpkMRf1Kh5U8a2y/4Rw" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        integrity="sha384-5e2ESR8Ycmos6g3gAKr1Jvwye8sW4U1u/cAKulfVJnkakCcMqhOudbtPnvJ+nbv7" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha384-7N9uWyfrDHXbDlwtQoLvZR7TvJMPvLlgKbiv3v6eRsnzWFHzmFQRRtKsb6c0S23O" crossorigin="anonymous"> -->
-
 </head>
 
 <body style="background-color: #bed7ec;">
@@ -32,7 +22,7 @@
             </div>
 
             <div class="col-4">
-                <button id="backToMemberList" class="btn btn-info mb-3">Back to Member List</button>
+                <button id="backToMemberList" class="btn btn-secondary mb-3">Back to Member List</button>
             </div>
         </div>
 
@@ -109,36 +99,5 @@
 
     <script src="index.js"></script>
 </body>
-
-<script>
-    $(document).ready(function () {
-        $("#backToMemberList").click(function () {
-            window.location.href = "members.html";
-        });
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const data = urlParams.get('data');
-
-        if (data) {
-            var decodedStringAtoB = atob(data);
-
-
-            var memberData = JSON.parse(decodedStringAtoB); // Populate the form fields with the parsed data 
-            $('#firstName').val(memberData.firstName);
-            $('#middleName').val(memberData.middleName);
-            $('#sirName').val(memberData.sirName);
-            $('#dob').val(memberData.dob);
-            $('#nameOfMother').val(memberData.nameOfMother);
-            $('#nameOfFather').val(memberData.nameOfFather);
-            $('#address').val(memberData.address);
-            $('#birthPlace').val(memberData.birthPlace);
-            $('#contactNo').val(memberData.contactNo);
-            $('#marriedDate').val(memberData.marriedDate);
-            $('#marriedChurch').val(memberData.marriedChurch);
-        }
-
-    });
-</script>
 
 </html>
