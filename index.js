@@ -21,32 +21,6 @@ $(document).ready(function () {
     window.location.href = "addmembers.html";
   });
 
-  $.get("http://localhost:3000/member-registration/get/all", function (data) {
-    data.forEach(function (member) {
-      var encodedStringBtoA = btoa(JSON.stringify(member));
-      $("#membersTableBody").append(
-        `<tr>
-          <td>${member.firstName}</td>
-          <td>${member.middleName}</td>
-          <td>${member.dob}</td>
-          <td>${member.nameOfMother}</td>
-          <td>${member.nameOfFather}</td>
-          <td>${member.address}</td>
-          <td>${member.birthPlace}</td>
-          <td> 
-            <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
-              <i class="fas fa-pencil-alt"></i> Update
-            </a>
-            
-            <button class="btn btn-danger delete-button" data-id="${member._id}">
-                <i class="fas fa-trash-alt"></i> Delete
-            </button>
-          </td>
-        </tr>`
-      );
-    });
-  });
-
   $("#addNewRegistrationButton").click(function () {
     window.location.href = "addmembers.html";
   });
@@ -250,24 +224,28 @@ $(document).ready(function () {
     } else {
       data.forEach((member) => {
         tableBody.append(`
-                    <tr>
-                        <td>${member.firstName}</td>
-                        <td>${member.middleName}</td>
-                        <td>${member.dob}</td>
-                        <td>${member.nameOfMother}</td>
-                        <td>${member.nameOfFather}</td>
-                        <td>${member.address}</td>
-                        <td>${member.birthPlace}</td>
-                        <td> 
-                            <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
-                                <i class="fas fa-pencil-alt"></i> Update 
-                            </a>
-                            <button class="btn btn-danger delete-button" data-id="${member._id}">
-                                <i class="fas fa-trash-alt"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                `);
+          <tr>
+              <td>${member.firstName}</td>
+              <td>${member.middleName}</td>
+              <td>${member.dob}</td>
+              <td>${member.nameOfMother}</td>
+              <td>${member.nameOfFather}</td>
+              <td>${member.address}</td>
+              <td>${member.birthPlace}</td>
+              <td> 
+                  <a href="viewmembers.html?id=${member._id}" class="btn btn-info">
+                    <i class="fas fa-eye"></i> View
+                  </a>
+
+                  <a href="editmembers.html?id=${member._id}" class="btn btn-primary">
+                      <i class="fas fa-pencil-alt"></i> Update 
+                  </a>
+                  <button class="btn btn-danger delete-button" data-id="${member._id}">
+                      <i class="fas fa-trash-alt"></i> Delete
+                  </button>
+              </td>
+          </tr>
+      `);
       });
     }
   }
