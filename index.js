@@ -10,7 +10,7 @@ $(document).ready(function () {
 
   $("#registerButton").click(function () {
     $.get(
-      "http://localhost:3000/member-registration/get/all",
+      "https://20.117.171.247/api/member-registration/get/all",
       function (data, status) {
         console.log("Data", data);
       }
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
     if (confirm("Are you sure you want to delete this member?")) {
       $.ajax({
-        url: `http://localhost:3000/member-registration/delete/${memberId}`,
+        url: `https://20.117.171.247/api/member-registration/delete/${memberId}`,
         type: "DELETE",
         success: function () {
           // Remove the row from the table
@@ -68,7 +68,7 @@ $(document).ready(function () {
     // Send the AJAX POST request for validation
     $.ajax({
       type: "POST",
-      url: "http://localhost:3000/signin", // Change this URL to your actual login endpoint
+      url: "https://20.117.171.247/api/signin", // Change this URL to your actual login endpoint
       data: JSON.stringify(formData),
       contentType: "application/json",
       success: function (response) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
 
     // Send the data to the server using an AJAX POST request
     $.ajax({
-      url: "http://localhost:3000/member-registration/create", // Replace this with your actual API endpoint
+      url: "https://20.117.171.247/api/member-registration/create", // Replace this with your actual API endpoint
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(formData), // Send the form data as a JSON string
@@ -138,7 +138,7 @@ $(document).ready(function () {
   const memberId = urlParams.get("id");
 
   $.ajax({
-    url: `http://localhost:3000/member-registration/${memberId}`, // Replace with your actual endpoint to get member details
+    url: `https://20.117.171.247/api/member-registration/${memberId}`, // Replace with your actual endpoint to get member details
     type: "GET",
     success: function (data) {
       // alert(JSON.stringify(data));
@@ -181,7 +181,7 @@ $(document).ready(function () {
 
     // Send updated data using AJAX PUT request
     $.ajax({
-      url: `http://localhost:3000/update-member-registration/${memberId}`, // Replace with your actual endpoint to update member
+      url: `https://20.117.171.247/api/update-member-registration/${memberId}`, // Replace with your actual endpoint to update member
       type: "PUT",
       contentType: "application/json",
       data: JSON.stringify(formData),
@@ -204,7 +204,7 @@ $(document).ready(function () {
   });
 
   //search functionality
-  const apiUrl = "http://localhost:3000/member-registration/get/all";
+  const apiUrl = "https://20.117.171.247/api/member-registration/get/all";
   let membersData = [];
 
   // Fetch members data when the page loads
