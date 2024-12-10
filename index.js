@@ -90,7 +90,7 @@ $(document).ready(function () {
   $("#addMemberForm").on("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Serialize the form data into a JSON object 
+    // Serialize the form data into a JSON object
     const formData = {
       firstName: $("#firstName").val(),
       middleName: $("#middleName").val(),
@@ -129,7 +129,7 @@ $(document).ready(function () {
 
   // Navigate back to the Registered Member List on button click
   $("#backToMemberList").on("click", function () {
-    window.location.href = "/members"; // Replace this with your actual member list page URL
+    window.location.href = "members.html"; // Replace this with your actual member list page URL
   });
 
   // new update function
@@ -187,7 +187,7 @@ $(document).ready(function () {
       data: JSON.stringify(formData),
       success: function (response) {
         alert("Member details updated successfully!");
-        window.location.href = "/members"; // Redirect to member list page
+        window.location.href = "members.html"; // Redirect to member list page
       },
       error: function (error) {
         console.error("Error updating member details:", error);
@@ -200,7 +200,8 @@ $(document).ready(function () {
 
   // Navigate back to the Registered Member List on button click
   $("#backToMemberList").on("click", function () {
-    window.location.href = "/members"; // Replace with your actual member list page URL
+    window.location.href = "members.html";
+    // Replace with your actual member list page URL
   });
 
   //search functionality
