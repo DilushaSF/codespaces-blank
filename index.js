@@ -90,7 +90,7 @@ $(document).ready(function () {
   $("#addMemberForm").on("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Serialize the form data into a JSON object
+    // Serialize the form data into a JSON object 
     const formData = {
       firstName: $("#firstName").val(),
       middleName: $("#middleName").val(),
