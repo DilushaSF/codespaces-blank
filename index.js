@@ -58,8 +58,7 @@ $(document).ready(function () {
   });
 
   $("#loginForm").submit(function (event) {
-    event.preventDefault(); // Prevent the default form submission
-    // Serialize form data
+    event.preventDefault();
     const formData = {
       email: $("#email").val(),
       password: $("#password").val(),
@@ -68,7 +67,7 @@ $(document).ready(function () {
     // Send the AJAX POST request for validation
     $.ajax({
       type: "POST",
-      url: "https://dilusha7.uksouth.cloudapp.azure.com/signin", // Change this URL to your actual login endpoint
+      url: "https://dilusha7.uksouth.cloudapp.azure.com/signin",
       data: JSON.stringify(formData),
       contentType: "application/json",
       success: function (response) {
@@ -86,11 +85,10 @@ $(document).ready(function () {
   });
 
   // New create post method
-  // Attach a submit event listener to the form
+
   $("#addMemberForm").on("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Serialize the form data into a JSON object
     const formData = {
       firstName: $("#firstName").val(),
       middleName: $("#middleName").val(),
@@ -107,12 +105,11 @@ $(document).ready(function () {
 
     // Send the data to the server using an AJAX POST request
     $.ajax({
-      url: "https://dilusha7.uksouth.cloudapp.azure.com/member-registration/create", // Replace this with your actual API endpoint
+      url: "https://dilusha7.uksouth.cloudapp.azure.com/member-registration/create",
       type: "POST",
       contentType: "application/json",
-      data: JSON.stringify(formData), // Send the form data as a JSON string
+      data: JSON.stringify(formData),
       success: function (response) {
-        // Handle success response
         alert("Member details saved successfully!");
         $("#addMemberForm")[0].reset(); // Reset the form
         window.location.href = "members.html";
@@ -129,7 +126,7 @@ $(document).ready(function () {
 
   // Navigate back to the Registered Member List on button click
   $("#backToMemberList").on("click", function () {
-    window.location.href = "members.html"; // Replace this with your actual member list page URL
+    window.location.href = "members.html";
   });
 
   // new update function
@@ -138,7 +135,7 @@ $(document).ready(function () {
   const memberId = urlParams.get("id");
 
   $.ajax({
-    url: `https://dilusha7.uksouth.cloudapp.azure.com/member-registration/${memberId}`, // Replace with your actual endpoint to get member details
+    url: `https://dilusha7.uksouth.cloudapp.azure.com/member-registration/${memberId}`,
     type: "GET",
     success: function (data) {
       // alert(JSON.stringify(data));
@@ -181,7 +178,7 @@ $(document).ready(function () {
 
     // Send updated data using AJAX PUT request
     $.ajax({
-      url: `https://dilusha7.uksouth.cloudapp.azure.com/update-member-registration/${memberId}`, // Replace with your actual endpoint to update member
+      url: `https://dilusha7.uksouth.cloudapp.azure.com/update-member-registration/${memberId}`,
       type: "PUT",
       contentType: "application/json",
       data: JSON.stringify(formData),
