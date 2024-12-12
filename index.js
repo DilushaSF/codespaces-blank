@@ -226,7 +226,7 @@ $(document).ready(function () {
     } else {
       data.forEach((member) => {
         tableBody.append(`
-          <tr>
+          <tr class="member-row">
               <td>${member.firstName}</td>
               <td>${member.middleName}</td>
               <td>${member.dob}</td>
